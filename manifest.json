@@ -1,0 +1,17 @@
+{
+    "name": "TeraMarker",
+    "version": "0.1.0.0",
+    "manifest_version": 3,
+    "description": "Mark any user on a FAQ site.",
+    "icons": {
+        "128": "icons/icon128.png"
+    },
+    "content_scripts": [{
+        "matches": [
+            "https://teratail.com/"
+        ],
+        "js": [
+            "contents.js"
+        ]
+    }]
+}
