@@ -1,16 +1,5 @@
-const Config = {
-    accessToken: 'アクセストークン',
-    baseUrl: 'https://teratail.com/api/v1',
-}
-
-const Endpoint = {
-    users: '/users',
-    usersSearch: '/users/search',
-    question: '/question',
-    users: '',
-}
-
-/*
+/**
+ * ★メモ★
  * # ユーザの名前を赤くしちゃう機能
  * - 質問一覧画面（質問者の名前）
  * - 質問画面の詳細（質問、回答、コメント上の名前）
@@ -29,16 +18,26 @@ const Endpoint = {
  */
 
 
-/**
- * Teratail APIを利用した機能をクラス化したもの
- * @author mahny
- */
-class TeraMarker {
-    constructor() {
-        // nop
-    }
+//------------------------------
+// 定数系
+//------------------------------
+
+const Config = {
+    accessToken: 'アクセストークン',
+    baseUrl: 'https://teratail.com/api/v1',
 }
 
+const Endpoint = {
+    users: '/users',
+    usersSearch: '/users/search',
+    question: '/question',
+    users: '',
+}
+
+
+//------------------------------
+// モジュール系
+//------------------------------
 /**
  * TeraTailユーザ情報
  * @author mahny
@@ -47,40 +46,50 @@ class TeraUser {
     constructor(id, displayName) {
         this.id = id; // ユーザが手動入力した場合は、初期化時に取れないハズ。画面から登録する時はJSで拾えるので取れる
         this.displayName = displayName;
-
-        // リネーム対策にidを取る
-        if (!this.id) {
-            const self = this;
-            new Promise((resolve, reject) => {
-                resolve('取得したid');
-            }).then(result => {
-                if (result) {
-                    self.id = result;
-                }
-            });
-        }
-    }
-
-    /**
-     * サムネイルURLからIDを抽出する。未指定時はdisplay_nameからAPIを使用して逆引きする
-     * @param {string} photo サムネイルURL
-     */
-    _extractId(photo) {
-        if (!photo || typeof(photo) != 'string') {
-            throw 'サムネイルURLが取得できませんでした / photo=[' + photo + ']';
-        }
-        this.id = 'サムネURLからidを抽出する正規表現';
     }
 }
 
 /**
- * 指定したURLにGetリクエストを投げて結果を取得する
- * @param {string} url リクエストURL
- * @returns {json} レスポンスJSON
+ * 答え害のないユーザの名前を染め上げちゃうクラス
  */
-function httpGet(url) {
-    // TODO 20210719 mahny angular使うかなあ、ベタでやるかなあ…
-    const req = new XMLHttpRequest();
-    req.open('GET', url);
+class TeraMarker {
+    /**
+     * 初期化
+     * @param {TeraUser[]} blackList 染めちゃうユーザリスト
+     */
+    constructor(blackList) {
+        this._watchIntervalMsec = 2000;
+        this.blackList = blackList;
 
+        this._dyeQuestions();
+    }
+
+    /**
+     * 質問一覧、質問詳細画面で名前を染め上げちゃう
+     */
+    _dyeQuestions() {
+        let query = "";
+        this.blackList.forEach(b => {
+            if (0 < query.length) {
+                query += ', ';
+            }
+            query += 'a[href="/users/' + b.displayName + '"]';
+        });
+
+        const loop = () => {
+            const elements = document.querySelectorAll(query);
+            elements?.forEach(element => {
+                element.style.color = '#ff0000';
+            });
+            setTimeout(loop, this._watchIntervalMsec);
+        };
+        setTimeout(loop, this._watchIntervalMsec);
+    }
 }
+
+//------------------------------
+// メイン処理
+//------------------------------
+new TeraMarker([
+    new TeraUser(null, 'mahny'),
+]);
