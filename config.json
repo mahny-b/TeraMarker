@@ -1,0 +1,7 @@
+{
+    "baseUrl": "https://teratail.com/api/v1",
+    "accessToken": "",
+    "blackList": [
+        {"id": "197", "displayName": "teratail"}
+    ]
+}
