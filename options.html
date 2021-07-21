@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>Tera Marker</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/umbrellajs"></script>
+    <style>
+        .textarea-users {
+            width: 90vw;
+            height: 20.0em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tera Marker.</h1>
+
+    <h2>保存（未実装）</h2>
+    <p>ボタンを押下するまでは保存しません。間違えた場合は画面を開きなおしてください。</p>
+    <button>全てを保存する</button>
+
+    <h2>設定（未実装）</h2>
+    <dl>
+        <dt>Googleアカウント連携許可:</dt>
+        <dd><label><input type="checkbox" id="google_linkage" disabled="true"> チェックを付けて連携するとえまーじぇんしーのシェア機能が使えます。</label></dd>
+        <dt>アクセストークン:</dt>
+        <dd><input type="text" id="access_token" class="text-config"></dd>
+        <dd>Teratailで発行したトークンを使うとAPIを使ったユーザ検索機能などが拡張機能から直接使えるようになります。とはいえ、使わなくてもブラウザで開いた時にページからある程度収集して動作します。</dd>
+    </dl>
+
+    <hr>
+
+    <h2>警告ユーザリスト（未実装）</h2>
+    <textarea id="waring_users" class="textarea-users"></textarea>
+
+    <hr>
+
+    <h2>歓迎ユーザリスト（未実装）</h2>
+    <textarea id="welcome_users" class="textarea-users"></textarea>
+
+    <hr>
+
+    <h2>使用したもの（色々変える可能性大）</h2>
+    <dl>
+        <dt>Umbrella JS</dt>
+        <dd><a href="https://umbrellajs.com/" target="_blank">https://umbrellajs.com/</a></dd>
+        <dd>
+            Copyright (c) 2014 Francisco Presencia.
+            Released under the MIT license. / <a href="https://github.com/franciscop/umbrella/blob/master/LICENSE" target="_blank">https://github.com/franciscop/umbrella/blob/master/LICENSE</a></dd>
+    </dl>
+
+    <hr>
+
+    <h2>Tera Markerについて</h2>
+    <dl>
+        <dt>作った人</dt>
+        <dd>@mahny_b <a href="https://twitter.com/mahny_b" target="_blank">https://twitter.com/mahny_b</a></dd>
+        <dt>作った経緯とか妄想機能とかソースとか</dt>
+        <dd><a href="https://github.com/mahny-b/TeraMarker" target="_blank">https://github.com/mahny-b/TeraMarker</a></dd>
+        <dt>ライセンス</dt>
+        <dd>
+            Copyright (c) 2021 mahny.
+            Released under the MIT license. / <a href="https://github.com/mahny-b/TeraMarker/blob/master/LICENSE" target="_blank">https://github.com/mahny-b/TeraMarker/blob/master/LICENSE</a></dd>
+    </dl>
+</body>
+</html>

@@ -6,12 +6,16 @@
     "icons": {
         "128": "icons/icon128.png"
     },
+    "permissions": [
+        "storage"
+    ],
     "content_scripts": [{
         "matches": [
-            "https://teratail.com/"
+            "https://teratail.com/*"
         ],
         "js": [
             "contents.js"
         ]
-    }]
+    }],
+    "options_page": "options.html"
 }
